@@ -1,0 +1,7 @@
+.DS_Store
+.bundle
+/vendor/
+pdf/*.pdf
+html/*.html
+html/*.png
+results.json
