@@ -2,8 +2,8 @@ require 'kconv'
 require 'nokogiri'
 
 class FParser
-  TOTAL_ITEMS = %w(給与口座振込額 支給額合計 控除額合計)
-  INCOME_ITEMS = %w(本給 グレード給 コンピテンシ給 時間外手当 京浜地域手当 通勤費補助 持株会奨励金 4月分初任給 4月分精算額 5月遡及額 福利厚生P課税 持株手数料支給 賞与口座振込額 基本分 成果分)
+  TOTAL_ITEMS = %w(給与口座振込額 支給額合計 控除額合計 賞与口座振込額)
+  INCOME_ITEMS = %w(本給 グレード給 コンピテンシ給 時間外手当 京浜地域手当 通勤費補助 持株会奨励金 4月分初任給 4月分精算額 5月遡及額 福利厚生P課税 持株手数料支給 基本分 成果分 定額 寸志)
   DEDUCTION_ITEMS = %w(所得税 住民税 年金保険料 個人拠出年金分 基本健康保険料 特定健康保険料 雇用保険料 寮費 団体定期保険 団体損害保険 従業員持株会 （内奨励金分 通勤費 労働組合費 労金等控除金 食事代 その他の控除 後援会費 （うち遡及額 持株手数料控除 手帳カレンダー)
   ATTENDANCE_ITEMS = %w(所定内出勤 年次休暇 年次半日休暇 普通時間外H 準欠勤回数 準欠勤H)
 
@@ -64,7 +64,7 @@ class FParser
   end
 
   def self.is_bonus?(doc)
-    doc.css('p').any? { |t| t.text.include?('賞与支払明細書') }
+    doc.css('p').any? { |t| t.text.include?('賞与支払明細書') || t.text.include?('寸志支払明細書') }
   end
 end
 
